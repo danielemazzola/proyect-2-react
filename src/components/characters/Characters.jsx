@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import './characters.css'
 
 const Characters = ({ char }) => {
-  const [rotations, setRotations] = useState({})
+  const [rotations, setRotations] = useState(false)
+  let degInit = 180 // ROTATE VALUE
 
-  const handleRotation = (id) => {
-    setRotations((initStateRotate) => ({
-      ...initStateRotate,
-      [id]: (initStateRotate[id] || 0) + 180
-    }))
-  }
   return (
     <div id={char.id}>
       <img
         src={char.image}
-        onClick={() => handleRotation(char.id)}
+        onClick={() => {
+          setRotations(!rotations)
+        }}
         style={{
-          transform: `rotate(${rotations[char.id] || 0}deg)`,
-          transition: 'transform 0.5s'
+          transform: rotations && `rotate(${degInit}deg)`
         }}
       />
     </div>
